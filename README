@@ -1,2 +1,4 @@
 Various Greasemonkey scripts.
 
+Renamed so can be opened on github.
+Ensure extension is .user.js so greasemonkey can recognise them.
