@@ -3,7 +3,7 @@
 // @namespace       https://github.com/boncey/gm-scripts
 // @include         http://*flickr.com/photos/*/favorites/*
 // @description     Shows a preview of the faves of each user who has faved a photo (based on http://userscripts.org/scripts/show/35134)
-// @version         0.4
+// @version         0.5
 // ==/UserScript==
 
 window.addEventListener("load", function() { load_faves() }, false);
@@ -30,6 +30,10 @@ function load_photos(li_el, idx) {
 
     var user_urls = document.evaluate("//*[@id='faves-right']/ul/li[" + idx + "]/a[1]/@href", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     var user_url = user_urls.snapshotItem(0).value;
+    if (user_url.substring(0, 7) == '/photos') {
+        // On Windows URLs are relative so make them absolute for the 'flickr.urls.lookupUser' call
+        user_url = 'http://flickr.com' + user_url
+    }
 
     GM_xmlhttpRequest({
         method: 'GET',
