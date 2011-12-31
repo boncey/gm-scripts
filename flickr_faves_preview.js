@@ -2,8 +2,9 @@
 // @name            Flickr Faves Preview
 // @namespace       https://github.com/boncey/gm-scripts
 // @include         http://*flickr.com/photos/*/favorites/*
+// @include         http://*flickr.com/photos/*/favorites
 // @description     Shows a preview of the faves of each user who has faved a photo (based on http://userscripts.org/scripts/show/35134)
-// @version         0.5
+// @version         0.6
 // ==/UserScript==
 
 window.addEventListener("load", function() { load_faves() }, false);
