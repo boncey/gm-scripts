@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name            Flickr Faves Preview
 // @namespace       https://github.com/boncey/gm-scripts
-// @include         http://*flickr.com/photos/*/favorites/*
-// @include         http://*flickr.com/photos/*/favorites
+// @include         https://*flickr.com/photos/*/*/favorites/*
+// @include         https://*flickr.com/photos/*/*/favorites
 // @description     Shows a preview of the faves of each user who has faved a photo (based on http://userscripts.org/scripts/show/35134)
 // @version         0.6
 // ==/UserScript==
@@ -33,12 +33,12 @@ function load_photos(li_el, idx) {
     var user_url = user_urls.snapshotItem(0).value;
     if (user_url.substring(0, 7) == '/photos') {
         // On Windows URLs are relative so make them absolute for the 'flickr.urls.lookupUser' call
-        user_url = 'http://flickr.com' + user_url
+        user_url = 'https://flickr.com' + user_url
     }
 
     GM_xmlhttpRequest({
         method: 'GET',
-        url:    'http://api.flickr.com/services/rest/'
+        url:    'https://api.flickr.com/services/rest/'
         +'?method=flickr.urls.lookupUser'
         +'&api_key=adbefb3a77a3ae86f2883e7968876f40'
         +'&format=json&nojsoncallback=1'
@@ -50,7 +50,7 @@ function load_photos(li_el, idx) {
             if (nsid != null) {
                 GM_xmlhttpRequest({
                     method: 'GET',
-                    url:    'http://api.flickr.com/services/rest/'
+                    url:    'https://api.flickr.com/services/rest/'
                     +'?method=flickr.favorites.getPublicList'
                     +'&api_key=adbefb3a77a3ae86f2883e7968876f40'
                     +'&format=json&nojsoncallback=1'
@@ -70,12 +70,12 @@ function load_photos(li_el, idx) {
                             }
                             photos_to_ignore[photo.id] = 1;
 
-                            var photo_url = 'http://farm' + photo.farm
+                            var photo_url = 'https://farm' + photo.farm
                                 + '.static.flickr.com/' 
                                 + photo.server + '/' 
                                 + photo.id + '_' + photo.secret + '_s.jpg';
 
-                            var page_url  = 'http://www.flickr.com/photos/'
+                            var page_url  = 'https://www.flickr.com/photos/'
                                 + photo.owner
                                 + '/' + photo.id + '/';
 
